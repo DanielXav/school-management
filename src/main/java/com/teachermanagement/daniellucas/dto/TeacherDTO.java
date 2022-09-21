@@ -1,6 +1,6 @@
 package com.teachermanagement.daniellucas.dto;
 
-import com.teachermanagement.daniellucas.Models.TeacherModel;
+import com.teachermanagement.daniellucas.models.TeacherModel;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.teachermanagement.daniellucas.Models;
+package com.teachermanagement.daniellucas.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
