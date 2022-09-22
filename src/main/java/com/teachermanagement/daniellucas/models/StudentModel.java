@@ -1,10 +1,19 @@
 package com.teachermanagement.daniellucas.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Data
@@ -22,4 +31,6 @@ public class StudentModel {
     private String registration;
     @Column(unique = true)
     private String email;
+    @ManyToMany(mappedBy = "teachers")
+    Set<SubjectModel> subjects = new HashSet<>();
 }
