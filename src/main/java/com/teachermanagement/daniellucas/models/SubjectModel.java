@@ -20,4 +20,7 @@ public class SubjectModel {
     private String name;
     @Column
     private String room;
+    @ManyToOne
+    @JoinColumn(name = "teacher_id", nullable = false)
+    private TeacherModel teacher;
 }
