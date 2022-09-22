@@ -38,7 +38,10 @@ public class TeacherService {
 	public TeacherDTO update(Long id, TeacherDTO dto) {
 		try {
 			TeacherModel entity = repository.findById(id).get();
-			BeanUtils.copyProperties(dto, entity);
+			entity.setName(dto.getName());
+			entity.setEmail(dto.getEmail());
+			entity.setGraduation(dto.getGraduation());
+			entity.setRegistration(dto.getRegistration());
 			repository.save(entity);
 			return new TeacherDTO(entity);
 		}
