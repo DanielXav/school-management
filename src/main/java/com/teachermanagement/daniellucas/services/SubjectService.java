@@ -1,22 +1,28 @@
 package com.teachermanagement.daniellucas.services;
 
-import com.teachermanagement.daniellucas.dto.SubjectDTO;
-import com.teachermanagement.daniellucas.exceptions.ResourceNotFoundException;
-import com.teachermanagement.daniellucas.models.SubjectModel;
-import com.teachermanagement.daniellucas.repositories.SubjectRepository;
-import org.springframework.beans.BeanUtils;
+import java.util.List;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
+import com.teachermanagement.daniellucas.dto.SubjectDTO;
+import com.teachermanagement.daniellucas.exceptions.ResourceNotFoundException;
+import com.teachermanagement.daniellucas.models.SubjectModel;
+import com.teachermanagement.daniellucas.models.TeacherModel;
+import com.teachermanagement.daniellucas.repositories.SubjectRepository;
+import com.teachermanagement.daniellucas.repositories.TeacherRepository;
 
 @Service
 public class SubjectService {
 
     @Autowired
     private SubjectRepository repository;
+    
+    @Autowired
+    private TeacherRepository teacherRepository;
 
     public List<SubjectDTO> findAll(){
         return repository.findAll().stream().map(x -> new SubjectDTO(x)).toList();
@@ -28,7 +34,10 @@ public class SubjectService {
 
     public SubjectDTO insert(SubjectDTO dto) {
         SubjectModel entity = new SubjectModel();
-        BeanUtils.copyProperties(dto, entity);
+        entity.setName(dto.getName());
+        entity.setRoom(dto.getRoom());
+        TeacherModel teacher = teacherRepository.findById(dto.getTeacherId()).get();
+        entity.setTeacher(teacher);
         repository.save(entity);
         return new SubjectDTO(entity);
     }
@@ -38,6 +47,8 @@ public class SubjectService {
             SubjectModel entity = repository.findById(id).get();
             entity.setName(dto.getName());
             entity.setRoom(dto.getRoom());
+            TeacherModel teacher = teacherRepository.findById(dto.getTeacherId()).get();
+            entity.setTeacher(teacher);
             repository.save(entity);
             return new SubjectDTO(entity);
         }

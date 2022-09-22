@@ -15,11 +15,13 @@ public class SubjectDTO {
     private Long id;
     private String name;
     private String room;
+    private Long teacherId;
     
 	public SubjectDTO(SubjectModel entity) {
 		id = entity.getId();
 		name = entity.getName();
 		room = entity.getRoom();
+		teacherId = entity.getTeacher().getId();
 	}
     
     
