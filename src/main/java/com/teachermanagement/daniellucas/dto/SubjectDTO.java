@@ -1,13 +1,12 @@
 package com.teachermanagement.daniellucas.dto;
 
 import javax.persistence.Entity;
-import javax.security.auth.Subject;
 
+import com.teachermanagement.daniellucas.models.SubjectModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +16,7 @@ public class SubjectDTO {
     private String name;
     private String room;
     
-	public SubjectDTO(Subject entity) {
+	public SubjectDTO(SubjectModel entity) {
 		id = entity.getId();
 		name = entity.getName();
 		room = entity.getRoom();
