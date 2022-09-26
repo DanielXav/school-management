@@ -31,6 +31,6 @@ public class StudentModel {
     private String registration;
     @Column(unique = true)
     private String email;
-    @ManyToMany(mappedBy = "teachers")
+    @ManyToMany(mappedBy = "students")
     Set<SubjectModel> subjects = new HashSet<>();
 }

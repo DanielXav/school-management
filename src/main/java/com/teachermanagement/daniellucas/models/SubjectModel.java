@@ -40,5 +40,5 @@ public class SubjectModel {
       name = "tb_subject_has_student", 
       joinColumns = @JoinColumn(name = "subject_id"), 
       inverseJoinColumns = @JoinColumn(name = "student_id"))
-    private Set<StudentModel> teachers =  new HashSet<>();
+    private Set<StudentModel> students =  new HashSet<>();
 }
