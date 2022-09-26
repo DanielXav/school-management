@@ -1,6 +1,8 @@
 package com.teachermanagement.daniellucas.controllers;
 
+import com.teachermanagement.daniellucas.dto.StudentDTO;
 import com.teachermanagement.daniellucas.dto.SubjectDTO;
+import com.teachermanagement.daniellucas.services.StudentService;
 import com.teachermanagement.daniellucas.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,33 +17,45 @@ import java.util.List;
 public class SubjectController {
 
     @Autowired
-    private SubjectService service;
+    private SubjectService subjectService;
+    @Autowired
+    private StudentService studentService;
 
     @GetMapping
     public ResponseEntity<List<SubjectDTO>> findAllSubjects() {
-        return ResponseEntity.ok().body(service.findAll());
+        return ResponseEntity.ok().body(subjectService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<SubjectDTO> findSubjectById(@PathVariable Long id) {
-        return ResponseEntity.ok().body(service.findById(id));
+        return ResponseEntity.ok().body(subjectService.findById(id));
     }
 
     @PostMapping
     private ResponseEntity<SubjectDTO> saveSubject(@RequestBody SubjectDTO subjectDTO) {
-        subjectDTO = service.insert(subjectDTO);
+        subjectDTO = subjectService.insertStudentIntoSubject(subjectDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(subjectDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(subjectDTO);
     }
 
     @PutMapping("/{id}")
     private ResponseEntity<SubjectDTO> updateSubject(@PathVariable Long id, @RequestBody SubjectDTO subjectDTO) {
-        return ResponseEntity.ok().body(service.update(id, subjectDTO));
+        return ResponseEntity.ok().body(subjectService.update(id, subjectDTO));
     }
 
     @DeleteMapping("/{id}")
     private ResponseEntity<Void> deleteSubjectById(@PathVariable Long id) {
-        service.delete(id);
+        subjectService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+//    @PatchMapping("/{subject_id}/matricularAluno/{student_id}")
+//    private String linkStudentWithSubject(@PathVariable("subject_id") Long subjectId, @PathVariable("student_id") Long studentId) {
+//        SubjectDTO subjectDTO = subjectService.findById(subjectId);
+//        StudentDTO studentDTO = studentService.findById(studentId);
+//
+//        subjectDTO.getStudents().add(studentDTO);
+//        subjectService.insert(subjectDTO);
+//        return "redirect:/sei la";
+//    }
 }

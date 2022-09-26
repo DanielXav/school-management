@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.teachermanagement.daniellucas.dto.StudentDTO;
+import com.teachermanagement.daniellucas.models.StudentModel;
+import com.teachermanagement.daniellucas.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -20,7 +23,8 @@ public class SubjectService {
 
     @Autowired
     private SubjectRepository repository;
-    
+    @Autowired
+    private StudentRepository studentRepository;
     @Autowired
     private TeacherRepository teacherRepository;
 
@@ -64,5 +68,22 @@ public class SubjectService {
         catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException("Subject id: " + id);
         }
+    }
+
+    public SubjectDTO insertStudentIntoSubject(SubjectDTO dto) {
+        SubjectModel entity = new SubjectModel();
+        entity.setName(dto.getName());
+        entity.setRoom(dto.getRoom());
+        TeacherModel teacher = teacherRepository.findById(dto.getTeacherId()).get();
+        entity.setTeacher(teacher);
+        entity.getStudents().clear();
+
+        for (StudentDTO i : dto.getStudents()) {
+            StudentModel studentModel = studentRepository.findById(i.getId()).get();
+            entity.getStudents().add(studentModel);
+
+        }
+        repository.save(entity);
+        return new SubjectDTO(entity);
     }
 }
