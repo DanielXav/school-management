@@ -1,6 +1,7 @@
 package com.teachermanagement.daniellucas.services;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -22,18 +23,19 @@ import com.teachermanagement.daniellucas.repositories.TeacherRepository;
 public class SubjectService {
 
     @Autowired
-    private SubjectRepository repository;
+    private SubjectRepository subjectRepository;
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
     private TeacherRepository teacherRepository;
 
     public List<SubjectDTO> findAll(){
-        return repository.findAll().stream().map(x -> new SubjectDTO(x)).toList();
+        return subjectRepository.findAll().stream().map(x -> new SubjectDTO(x, x.getStudents())).toList();
     }
 
     public SubjectDTO findById(Long id) {
-        return new SubjectDTO(repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Subject")));
+        SubjectModel subjectModel = subjectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Subject"));
+        return new SubjectDTO(subjectModel, subjectModel.getStudents());
     }
 
     public SubjectDTO insert(SubjectDTO dto) {
@@ -42,18 +44,18 @@ public class SubjectService {
         entity.setRoom(dto.getRoom());
         TeacherModel teacher = teacherRepository.findById(dto.getTeacherId()).get();
         entity.setTeacher(teacher);
-        repository.save(entity);
+        subjectRepository.save(entity);
         return new SubjectDTO(entity);
     }
 
     public SubjectDTO update(Long id, SubjectDTO dto) {
         try {
-            SubjectModel entity = repository.findById(id).get();
+            SubjectModel entity = subjectRepository.findById(id).get();
             entity.setName(dto.getName());
             entity.setRoom(dto.getRoom());
             TeacherModel teacher = teacherRepository.findById(dto.getTeacherId()).get();
             entity.setTeacher(teacher);
-            repository.save(entity);
+            subjectRepository.save(entity);
             return new SubjectDTO(entity);
         }
         catch(EntityNotFoundException e) {
@@ -63,7 +65,7 @@ public class SubjectService {
 
     public void delete(Long id) {
         try {
-            repository.deleteById(id);
+            subjectRepository.deleteById(id);
         }
         catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException("Subject id: " + id);
@@ -83,7 +85,7 @@ public class SubjectService {
             entity.getStudents().add(studentModel);
 
         }
-        repository.save(entity);
+        subjectRepository.save(entity);
         return new SubjectDTO(entity);
     }
 }
