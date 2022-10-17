@@ -19,10 +19,10 @@ public class RoleModel implements Serializable {
     private Long id;
     private String authority;
 
-    public Role() {
+    public RoleModel() {
     }
 
-    public Role(Long id, String authority) {
+    public RoleModel(Long id, String authority) {
         this.id = id;
         this.authority = authority;
     }
@@ -56,7 +56,7 @@ public class RoleModel implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Role other = (Role) obj;
+        RoleModel other = (RoleModel) obj;
         return Objects.equals(id, other.id);
     }
 
