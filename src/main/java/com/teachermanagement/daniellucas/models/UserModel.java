@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,11 +19,11 @@ import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserModelDetails;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "tb_user")
-public class UserModel implements UserModelDetails, Serializable {
+public class UserModel implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -120,7 +119,7 @@ public class UserModel implements UserModelDetails, Serializable {
 	}
 
 	@Override
-	public String getUserModelname() {
+	public String getUsername() {
 		return email;
 	}
 

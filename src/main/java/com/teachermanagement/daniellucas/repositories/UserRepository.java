@@ -8,4 +8,5 @@ import com.teachermanagement.daniellucas.models.UserModel;
 @Repository
 public interface UserRepository extends JpaRepository<UserModel, Long> {
 
+	UserModel findByEmail(String email);
 }
