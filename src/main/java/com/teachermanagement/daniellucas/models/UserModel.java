@@ -24,7 +24,7 @@ import org.springframework.security.core.userdetails.UserModelDetails;
 
 @Entity
 @Table(name = "tb_user")
-public class UserModelModel implements UserModelDetails, Serializable {
+public class UserModel implements UserModelDetails, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -40,7 +40,7 @@ public class UserModelModel implements UserModelDetails, Serializable {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles = new HashSet<>();
+	private Set<RoleModel> roles = new HashSet<>();
 	
 	public UserModel() {
 	}
@@ -93,7 +93,7 @@ public class UserModelModel implements UserModelDetails, Serializable {
 		this.password = password;
 	}
 	
-	public Set<Role> getRoles() {
+	public Set<RoleModel> getRoles() {
 		return roles;
 	}
 
