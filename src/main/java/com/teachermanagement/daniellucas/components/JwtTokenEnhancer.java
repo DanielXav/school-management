@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 
+import com.teachermanagement.daniellucas.models.UserModel;
 import com.teachermanagement.daniellucas.repositories.UserRepository;
 
 
@@ -19,7 +20,7 @@ public class JwtTokenEnhancer implements TokenEnhancer {
 
 	@Override
 	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-		User user = userRepository.findByEmail(authentication.getName());
+		UserModel user = userRepository.findByEmail(authentication.getName());
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("userFirstName", user.getFirstName());
