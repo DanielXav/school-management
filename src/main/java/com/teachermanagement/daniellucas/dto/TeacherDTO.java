@@ -11,14 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TeacherDTO {
 
-	private Long id;
 	private String name;
 	private	String graduation;
 	private String registration;
 	private String email;
 	
 	public TeacherDTO(TeacherModel entity) {
-		id = entity.getId();
 		name = entity.getName();
 		graduation = entity.getGraduation();
 		registration = entity.getRegistration();
