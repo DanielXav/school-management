@@ -4,6 +4,12 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.teachermanagement.daniellucas.dto.RoleDTO;
+import com.teachermanagement.daniellucas.dto.UserDTO;
+import com.teachermanagement.daniellucas.dto.UserInsertDTO;
+import com.teachermanagement.daniellucas.dto.UserUpdateDTO;
+import com.teachermanagement.daniellucas.exceptions.DatabaseException;
+import com.teachermanagement.daniellucas.repositories.RoleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
