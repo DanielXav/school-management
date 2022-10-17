@@ -11,8 +11,9 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 
 import com.teachermanagement.daniellucas.models.UserModel;
 import com.teachermanagement.daniellucas.repositories.UserRepository;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class JwtTokenEnhancer implements TokenEnhancer {
 	
 	@Autowired
