@@ -22,15 +22,12 @@ import com.teachermanagement.daniellucas.components.JwtTokenEnhancer;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-	
-	@Value("${security.oauth2.client.client-id}")
-	private String clientId;
-	
-	@Value("${security.oauth2.client.client-secret}")
-	private String clientSecret;
-	
-	@Value("${jwt.duration}")
-	private Integer jwtDuration;
+
+	private String clientId = "daniellucas";
+
+	private String clientSecret = "daniellucas123";
+
+	private Integer jwtDuration = 86400;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -48,7 +45,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private JwtTokenEnhancer tokenEnhancer;
 	
 	@Override
-	@Bean
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 		security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
 	}
