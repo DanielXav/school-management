@@ -31,9 +31,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Autowired
     private JwtTokenStore tokenStore;
 
-    private static final String[] PUBLIC = { "/oauth/token", "/swagger-ui/index.html", "/swagger-resources/**", "/v2/api-docs", "/webjars/**"};
+    private static final String[] PUBLIC = { "/oauth/token", "/swagger-ui/index.html", "/swagger-resources/**", "/v2/api-docs", "/webjars/**", "/users/**"};
     
-    private static final String[] PRIVATE = { "/h2-console/**", "/users/**", "/turmas/**", "/professores/**", "/alunos/**"};
+    private static final String[] PRIVATE = { "/h2-console/**", "/turmas/**", "/professores/**", "/alunos/**"};
 
 
     @Override
