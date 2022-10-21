@@ -30,9 +30,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Autowired
     private JwtTokenStore tokenStore;
 
-    private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
+    private static final String[] PUBLIC = { "/oauth/token" };
+    
+    private static final String[] PRIVATE = { "/h2-console/**", "/users/**", "/turmas/**", "/professores/**", "/alunos/**"};
 
-    private static final String[] ADMIN = { "/users/**", "/turmas/**", "/professores/**", "/alunos/**" };
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -49,7 +50,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(PUBLIC).permitAll()
-                .antMatchers(ADMIN).hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, PRIVATE).permitAll()
+                .antMatchers(PRIVATE).hasAnyRole("TEACHER", "STUDENT")
+                .antMatchers(PRIVATE).hasRole("TEACHER")
                 .anyRequest().authenticated();
 
         http.cors().configurationSource(corsConfigurationSource());
