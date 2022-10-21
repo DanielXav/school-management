@@ -10,6 +10,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
@@ -30,7 +31,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Autowired
     private JwtTokenStore tokenStore;
 
-    private static final String[] PUBLIC = { "/oauth/token" };
+    private static final String[] PUBLIC = { "/oauth/token", "/swagger-ui/index.html", "/swagger-resources/**", "/v2/api-docs", "/webjars/**"};
     
     private static final String[] PRIVATE = { "/h2-console/**", "/users/**", "/turmas/**", "/professores/**", "/alunos/**"};
 
@@ -57,7 +58,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
         http.cors().configurationSource(corsConfigurationSource());
     }
-
+    
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfig = new CorsConfiguration();
