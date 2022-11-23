@@ -27,10 +27,10 @@ public class AuthService {
 		}
 	}
 	
-	public void validateSelfOrAdmin() {
-		UserModel user = authenticated();
-		if (!user.hasHole("ROLE_ADMIN")) {
-			throw new ForbiddenException("Access denied");
-		}
-	}
+//	public void validateSelfOrAdmin() {
+//		UserModel user = authenticated();
+//		if (!user.hasHole("ROLE_ADMIN")) {
+//			throw new ForbiddenException("Access denied");
+//		}
+//	}
 }
