@@ -25,5 +25,8 @@ public class StudentModel {
     @Column(unique = true)
     private String email;
     @ManyToMany(mappedBy = "students")
-    Set<SubjectModel> subjects = new HashSet<>();
+    private Set<SubjectModel> subjects = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "project_id", nullable = false)
+    private ProjectModel project;
 }

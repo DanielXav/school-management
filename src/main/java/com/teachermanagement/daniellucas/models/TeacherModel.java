@@ -29,5 +29,7 @@ public class TeacherModel {
 	private String email;
 	@OneToMany(mappedBy = "teacher")
 	private List<SubjectModel> subjects = new ArrayList<>();
+	@OneToOne(mappedBy = "teacher")
+	private ProjectModel project;
 	
 }

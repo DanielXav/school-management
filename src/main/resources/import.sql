@@ -14,6 +14,7 @@ INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Daniel', '
 
 INSERT INTO tb_role (authority) VALUES ('ROLE_STUDENT');
 INSERT INTO tb_role (authority) VALUES ('ROLE_TEACHER');
+INSERT INTO tb_role (authority) VALUES ('ROLE_COORDINATOR');
 
 INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 1);
