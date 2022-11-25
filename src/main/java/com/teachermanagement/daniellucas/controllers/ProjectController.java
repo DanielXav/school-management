@@ -31,19 +31,19 @@ public class ProjectController {
 
     @PostMapping
     private ResponseEntity<ProjectDTO> saveStudent(@RequestBody ProjectDTO projectDTO) {
-        projectDTO = service.insert(projectDTO);
+        projectDTO = service.insertStudentIntoProject(projectDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(projectDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(projectDTO);
     }
 
-//    @PutMapping("/{id}")
-//    private ResponseEntity<ProjectDTO> updateStudent(@PathVariable Long id, @RequestBody StudentDTO projectDTO) {
-//        return ResponseEntity.ok().body(service.update(id, projectDTO));
-//    }
+    @PutMapping("/{id}")
+   private ResponseEntity<ProjectDTO> updateStudent(@PathVariable Long id, @RequestBody ProjectDTO projectDTO) {
+       return ResponseEntity.ok().body(service.update(id, projectDTO));
+    }
 
-//    @DeleteMapping("/{id}")
-//    private ResponseEntity<Void> deleteStudentById(@PathVariable Long id) {
-//        service.delete(id);
-//        return ResponseEntity.noContent().build();
-//    }
+   @DeleteMapping("/{id}")
+    private ResponseEntity<Void> deleteStudentById(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+      }
 }
