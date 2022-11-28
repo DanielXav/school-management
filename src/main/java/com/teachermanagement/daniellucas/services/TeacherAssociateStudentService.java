@@ -3,6 +3,7 @@ package com.teachermanagement.daniellucas.services;
 import com.teachermanagement.daniellucas.dto.ProjectDTO;
 import com.teachermanagement.daniellucas.dto.StudentDTO;
 import com.teachermanagement.daniellucas.dto.TeacherAssociateStudentDTO;
+import com.teachermanagement.daniellucas.exceptions.SameStudentAtProjectException;
 import com.teachermanagement.daniellucas.models.ProjectModel;
 import com.teachermanagement.daniellucas.models.StudentModel;
 import com.teachermanagement.daniellucas.models.TeacherAssociateStudentModel;
@@ -26,12 +27,19 @@ public class TeacherAssociateStudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public TeacherAssociateStudentDTO insertStudentIntoProject(TeacherAssociateStudentDTO dto) {
+    public TeacherAssociateStudentDTO insertStudentIntoProject(TeacherAssociateStudentDTO dto) throws Exception {
         TeacherAssociateStudentModel entity = new TeacherAssociateStudentModel();
 
         TeacherModel teacher = teacherRepository.findById(dto.getTeacherId()).get();
         StudentModel student = studentRepository.findById(dto.getStudentId()).get();
         ProjectModel project = projectRepository.findById(dto.getProjectId()).get();
+
+        for (TeacherAssociateStudentModel i : teacherAssociateStudentRepository.findAll()) {
+
+            if (i.getStudent().getId().equals(student.getId()) || i.getTeacher().getId().equals(teacher.getId()) || i.getProject().getId().equals(project.getId())) {
+                throw new SameStudentAtProjectException("Mesmo aluno e professor e projeto");
+            }
+        }
         
         entity.setTeacher(teacher);
         entity.setStudent(student);

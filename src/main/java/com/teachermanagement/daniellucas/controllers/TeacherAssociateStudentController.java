@@ -21,7 +21,7 @@ public class TeacherAssociateStudentController {
     private TeacherAssociateStudentService service;
 
     @PostMapping
-    private ResponseEntity<TeacherAssociateStudentDTO> associateStudent(@RequestBody TeacherAssociateStudentDTO teacherAssociateStudentDTO) {
+    private ResponseEntity<TeacherAssociateStudentDTO> associateStudent(@RequestBody TeacherAssociateStudentDTO teacherAssociateStudentDTO) throws Exception {
         teacherAssociateStudentDTO = service.insertStudentIntoProject(teacherAssociateStudentDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(teacherAssociateStudentDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(teacherAssociateStudentDTO);

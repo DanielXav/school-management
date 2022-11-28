@@ -20,7 +20,7 @@ public class ProjectModel {
     private String name;
     private String description;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id", unique = true)
     private TeacherModel teacher;
     @OneToMany(mappedBy = "project")
     private List<StudentModel> students = new ArrayList<>();
