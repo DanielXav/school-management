@@ -24,6 +24,8 @@ public class StudentModel {
     private String registration;
     @Column(unique = true)
     private String email;
+    @Column
+    private String function;
     @ManyToMany(mappedBy = "students")
     private Set<SubjectModel> subjects = new HashSet<>();
     @ManyToOne

@@ -32,10 +32,14 @@ public class TeacherAssociateStudentService {
         TeacherModel teacher = teacherRepository.findById(dto.getTeacherId()).get();
         StudentModel student = studentRepository.findById(dto.getStudentId()).get();
         ProjectModel project = projectRepository.findById(dto.getProjectId()).get();
-
+        
         entity.setTeacher(teacher);
         entity.setStudent(student);
         entity.setProject(project);
+        
+        student.setFunction(dto.getFunction());
+        
+        studentRepository.save(student);
 
         teacherAssociateStudentRepository.save(entity);
         return new TeacherAssociateStudentDTO(entity);

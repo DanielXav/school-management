@@ -16,6 +16,8 @@ public class TeacherAssociateStudentDTO {
     private Long teacherId;
     private Long projectId;
     private Long studentId;
+    
+    private String function;
 
     public TeacherAssociateStudentDTO(TeacherAssociateStudentModel teacherAssociateStudentModel) {
         this.id = teacherAssociateStudentModel.getId();
