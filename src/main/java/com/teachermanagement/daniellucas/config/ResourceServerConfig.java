@@ -33,9 +33,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private static final String[] PUBLIC = { "/oauth/token", "/swagger-ui/index.html", "/swagger-resources/**", "/v2/api-docs", "/webjars/**", "/users/**", "/h2-console/**"};
     
-    private static final String[] PRIVATE = { "/turmas/**", "/professores/**", "/alunos/**",  "/projetos/**"};
+    private static final String[] PRIVATE = { "/turmas/**", "/professores/**", "/alunos/**" };
     
-//    private static final String[] COORDINATOR = { "/projetos/**" };
+    private static final String[] COORDINATOR = {  "/projetos/**", "/associar-projeto/**"  };
 
 
     @Override
@@ -54,8 +54,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(PUBLIC).permitAll()
                 .antMatchers(HttpMethod.GET, PRIVATE).permitAll()
-                .antMatchers(PRIVATE).hasAnyRole("TEACHER", "STUDENT")
-                .antMatchers(PRIVATE).hasRole("TEACHER")
+                .antMatchers(HttpMethod.GET, COORDINATOR).permitAll()
+                .antMatchers(PRIVATE).hasAnyRole("TEACHER", "STUDENT", "COORDINATOR")
+                .antMatchers(COORDINATOR).hasRole("COORDINATOR")
                 .anyRequest().authenticated();
 
         http.cors().configurationSource(corsConfigurationSource());
