@@ -23,11 +23,14 @@ import com.teachermanagement.daniellucas.components.JwtTokenEnhancer;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-	private String clientId = "daniellucas";
+	@Value("${security.oauth2.client.client-id}")
+	private String clientId;
 
-	private String clientSecret = "daniellucas123";
+	@Value("${security.oauth2.client.client-secret}")
+	private String clientSecret;
 
-	private Integer jwtDuration = 86400;
+	@Value("${jwt.duration}")
+	private Integer jwtDuration;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
