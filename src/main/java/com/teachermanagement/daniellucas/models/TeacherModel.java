@@ -32,4 +32,13 @@ public class TeacherModel {
 	@OneToOne(mappedBy = "teacher")
 	private ProjectModel project;
 	
+	public TeacherModel(Long id, String name, String graduation, String registration, String email) {
+		this.id = id;
+		this.name = name;
+		this.graduation = graduation;
+		this.registration = registration;
+		this.email = email;
+	}
+	
+	
 }
