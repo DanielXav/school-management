@@ -24,4 +24,6 @@ public class ProjectModel {
     private TeacherModel teacher;
     @OneToMany(mappedBy = "project")
     private List<StudentModel> students = new ArrayList<>();
+
+
 }
