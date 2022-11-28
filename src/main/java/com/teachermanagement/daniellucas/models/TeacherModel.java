@@ -39,6 +39,12 @@ public class TeacherModel {
 		this.registration = registration;
 		this.email = email;
 	}
-	
-	
+
+	public TeacherModel(String name, String graduation, String registration, String email) {
+		this.name = name;
+		this.graduation = graduation;
+		this.registration = registration;
+		this.email = email;
+	}
+
 }

@@ -16,7 +16,14 @@ public class TeacherDTO {
 	private	String graduation;
 	private String registration;
 	private String email;
-	
+
+	public TeacherDTO(String name, String graduation, String registration, String email) {
+		this.name = name;
+		this.graduation = graduation;
+		this.registration = registration;
+		this.email = email;
+	}
+
 	public TeacherDTO(TeacherModel entity) {
 		id = entity.getId();
 		name = entity.getName();

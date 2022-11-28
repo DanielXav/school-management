@@ -18,7 +18,11 @@ import com.teachermanagement.daniellucas.repositories.TeacherRepository;
 public class TeacherService {
 
 	@Autowired
-	private TeacherRepository repository;
+	private final TeacherRepository repository;
+
+	public TeacherService(TeacherRepository repository) {
+		this.repository = repository;
+	}
 	
 	public List<TeacherDTO> findAll(){
 		return repository.findAll().stream().map(x -> new TeacherDTO(x)).toList();
