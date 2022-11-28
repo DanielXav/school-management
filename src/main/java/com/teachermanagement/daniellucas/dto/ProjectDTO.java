@@ -33,7 +33,7 @@ public class ProjectDTO {
 	public ProjectDTO(ProjectModel projectModel, List<StudentModel> students) {
 		this(projectModel);
 		students.forEach(x -> {
-			this.students.add(new StudentDTO(x));
+			this.students.add(new StudentDTO(x, "error"));
 		});
 	}
 }

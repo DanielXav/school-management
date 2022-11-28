@@ -16,6 +16,8 @@ public class StudentDTO {
     private String registration;
     private String email;
     private Long projectId;
+    
+    private String function;
 
     public StudentDTO(StudentModel studentModel) {
         id = studentModel.getId();
@@ -23,5 +25,14 @@ public class StudentDTO {
         registration = studentModel.getRegistration();
         email = studentModel.getEmail();
         projectId = studentModel.getProject().getId();
+    }
+    
+    public StudentDTO(StudentModel studentModel, String error) {
+        id = studentModel.getId();
+        name = studentModel.getName();
+        registration = studentModel.getRegistration();
+        email = studentModel.getEmail();
+        projectId = studentModel.getProject().getId();
+        function = studentModel.getFunction();
     }
 }
