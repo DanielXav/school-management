@@ -15,11 +15,13 @@ public class StudentDTO {
     private String name;
     private String registration;
     private String email;
+    private Long projectId;
 
     public StudentDTO(StudentModel studentModel) {
         id = studentModel.getId();
         name = studentModel.getName();
         registration = studentModel.getRegistration();
         email = studentModel.getEmail();
+        projectId = studentModel.getProject().getId();
     }
 }

@@ -1,25 +1,29 @@
 package com.teachermanagement.daniellucas.services;
 
-import com.teachermanagement.daniellucas.dto.StudentDTO;
-import com.teachermanagement.daniellucas.dto.TeacherDTO;
-import com.teachermanagement.daniellucas.exceptions.ResourceNotFoundException;
-import com.teachermanagement.daniellucas.models.StudentModel;
-import com.teachermanagement.daniellucas.models.TeacherModel;
-import com.teachermanagement.daniellucas.repositories.StudentRepository;
-import com.teachermanagement.daniellucas.repositories.TeacherRepository;
+import java.util.List;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
+import com.teachermanagement.daniellucas.dto.StudentDTO;
+import com.teachermanagement.daniellucas.exceptions.ResourceNotFoundException;
+import com.teachermanagement.daniellucas.models.ProjectModel;
+import com.teachermanagement.daniellucas.models.StudentModel;
+import com.teachermanagement.daniellucas.repositories.ProjectRepository;
+import com.teachermanagement.daniellucas.repositories.StudentRepository;
 
 @Service
 public class StudentService {
 
     @Autowired
     private StudentRepository repository;
+    
+    @Autowired
+    private ProjectRepository projectRepository;
 
     public List<StudentDTO> findAll(){
         return repository.findAll().stream().map(x -> new StudentDTO(x)).toList();
@@ -32,6 +36,8 @@ public class StudentService {
     public StudentDTO insert(StudentDTO dto) {
         StudentModel entity = new StudentModel();
         BeanUtils.copyProperties(dto, entity);
+        ProjectModel project = projectRepository.findById(dto.getProjectId()).get();
+        entity.setProject(project);
         repository.save(entity);
         return new StudentDTO(entity);
     }
